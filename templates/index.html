@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Customer Exit Prediction</title>
+    <style>
+        /* General Styles */
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f8f9fa;
+            margin: 0;
+            padding: 0;
+            color: #333;
+        }
+
+        h1 {
+            text-align: center;
+            margin-top: 30px;
+            color: #343a40;
+            font-size: 2.5em;
+        }
+
+        /* Container for form */
+        .form-container {
+            max-width: 1000px;
+            margin: 50px auto;
+            background-color: #ffffff;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Form Styles */
+        form {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        label {
+            font-size: 16px;
+            color: #495057;
+        }
+
+        input[type="number"], input[type="text"] {
+            padding: 12px;
+            font-size: 16px;
+            border-radius: 8px;
+            border: 1px solid #ced4da;
+            box-sizing: border-box;
+            width: 100%;
+            background-color: #f1f1f1;
+        }
+
+        /* Button Styles */
+        button {
+            background-color: #007bff;
+            color: white;
+            font-size: 18px;
+            border: none;
+            padding: 15px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            grid-column: span 2; /* Make button span across both columns */
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        /* Prediction Text */
+        h3 {
+            text-align: center;
+            margin-top: 30px;
+            font-size: 20px;
+            color: #28a745;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            form {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Customer Exit Prediction</h1>
+
+    <div class="form-container">
+        <form action="/predict" method="POST">
+            <!-- Numerical features -->
+            <div>
+                <label for="CreditScore">Credit Score:</label>
+                <input type="number" name="CreditScore" required>
+            </div>
+
+            <div>
+                <label for="Age">Age:</label>
+                <input type="number" name="Age" required>
+            </div>
+
+            <div>
+                <label for="Tenure">Tenure:</label>
+                <input type="number" name="Tenure" required>
+            </div>
+
+            <div>
+                <label for="Balance">Balance:</label>
+                <input type="number" name="Balance" required>
+            </div>
+
+            <div>
+                <label for="NumOfProducts">Number of Products:</label>
+                <input type="number" name="NumOfProducts" required>
+            </div>
+
+            <div>
+                <label for="HasCrCard">Has Credit Card:</label>
+                <input type="number" name="HasCrCard" required>
+            </div>
+
+            <div>
+                <label for="IsActiveMember">Is Active Member:</label>
+                <input type="number" name="IsActiveMember" required>
+            </div>
+
+            <div>
+                <label for="EstimatedSalary">Estimated Salary:</label>
+                <input type="number" name="EstimatedSalary" required>
+            </div>
+
+            <!-- Text input for Geography -->
+            <div>
+                <label for="Geography">Geography (France/Germany/Spain):</label>
+                <input type="text" name="Geography" required>
+            </div>
+
+            <!-- Text input for Gender -->
+            <div>
+                <label for="Gender">Gender (Male/Female):</label>
+                <input type="text" name="Gender" required>
+            </div>
+
+            <!-- Submit Button -->
+            <button type="submit">Predict</button>
+        </form>
+
+        {% if prediction_text %}
+            <h3>{{ prediction_text }}</h3>
+        {% endif %}
+    </div>
+
+</body>
+</html>
